@@ -57,7 +57,7 @@ h1 { text-align: center; font-size: 2.8rem; margin-bottom: 10px; letter-spacing:
     border-radius: var(--radius);
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2, box-shadow 0.2;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -77,7 +77,7 @@ h1 { text-align: center; font-size: 2.8rem; margin-bottom: 10px; letter-spacing:
     object-fit: contain;
     display: block;
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.35 ease;
 }
 .card img.loaded { opacity: 1; }
 
@@ -86,7 +86,7 @@ h1 { text-align: center; font-size: 2.8rem; margin-bottom: 10px; letter-spacing:
     position: absolute; inset: 0;
     z-index: 2;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
-    animation: shimmer 1.4s infinite;
+    animation: shimmer 1.4 infinite;
     pointer-events: none;
 }
 @keyframes shimmer {
@@ -174,22 +174,28 @@ const PRELOAD_MARGIN = '400px 0px';
 const FRAME_BUDGET_MS = 8;
 
 const SERIES = [
-    { id: 'aurora',     title: '⚡ 极光系列' },
-    { id: 'bluebird',   title: '🐦 青鸟系列' },
-    { id: 'rebar',      title: '🔩 螺纹钢系列' },
-    { id: 'dingfengbo', title: '🎋 国风系列' },
-    { id: 'art',        title: '🎨 艺术·联名·限定' },
-    { id: 'xingzuo',    title: '＆ 12星座系列' },
-    { id: 'other',      title: '🎁 其他主题礼盒' },
+    { id: 'xingzuo',     title: '＆ 12星座系列' },
+    { id: 'aurora7',     title: '⚡ 极光7' },
+    { id: 'aurora7pro',  title: '⚡ 极光7 Pro' },
+    { id: 'aurora50',    title: '⚡ 极光50' },
+    { id: 'auroraOther', title: '⚡ 极光其他' },
+    { id: 'bluebird',    title: '🐦 青鸟系列' },
+    { id: 'rebar',       title: '🔩 螺纹钢系列' },
+    { id: 'dingfengbo',  title: '🎋 国风系列' },
+    { id: 'art',         title: '🎨 艺术·联名·限定' },
+    { id: 'other',       title: '🎁 其他主题礼盒' },
 ];
 
 const RULES = [
-    { id: 'xingzuo',    re: /星座|白羊|金牛|双子|巨蟹|狮子|处女|天秤|天蝎|射手|摩羯|水瓶|双鱼/ },
-    { id: 'aurora',     re: /极光/ },
-    { id: 'bluebird',   re: /青鸟/ },
-    { id: 'rebar',      re: /螺纹钢/ },
-    { id: 'dingfengbo', re: /定风波|赤壁赋|金榜题名|竹影|凤栖/ },
-    { id: 'art',        re: /莫奈|梵高|达芬奇|星月夜|麦田|睡莲|鸢尾|向日葵|岩间圣母|丝柏|联名/ },
+    { id: 'xingzuo',     re: /星座|白羊|金牛|双子|巨蟹|狮子|处女|天秤|天蝎|射手|摩羯|水瓶|双鱼/ },
+    { id: 'aurora7pro',  re: /极光\s*7\s*pro/i },   // 必须在 aurora7 之前
+    { id: 'aurora50',    re: /极光\s*50/ },
+    { id: 'aurora7',     re: /极光\s*7/ },
+    { id: 'auroraOther', re: /极光/ },              // 剩余极光兜底
+    { id: 'bluebird',    re: /青鸟/ },
+    { id: 'rebar',       re: /螺纹钢/ },
+    { id: 'dingfengbo',  re: /定风波|赤壁赋|金榜题名|竹影|凤栖/ },
+    { id: 'art',         re: /莫奈|梵高|达芬奇|星月夜|麦田|睡莲|鸢尾|向日葵|岩间圣母|丝柏|联名/ },
 ];
 
 const OVERRIDE = {
