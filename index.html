@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>川崎礼盒图册</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background: #f5f2ee; padding: 30px; }
+        h1 { text-align: center; font-size: 2.8rem; color: #2c3e50; margin-bottom: 10px; letter-spacing: 4px; }
+        .sub { text-align: center; color: #7f8c8d; margin-bottom: 40px; }
+        .series { margin-bottom: 50px; }
+        .series-title { font-size: 1.8rem; font-weight: 600; border-left: 8px solid #e67e22; padding-left: 20px; margin-bottom: 25px; color: #2c3e50; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); overflow: hidden; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,0.15); }
+        .card img { width: 100%; height: 210px; object-fit: contain; display: block; background: #f0ece8; }
+        .card .name { padding: 12px 14px; font-size: 0.95rem; font-weight: 500; text-align: center; color: #34495e; border-top: 1px solid #f0ece8; }
+        .no-img { display: flex; align-items: center; justify-content: center; height: 210px; background: #f0ece8; color: #b0a9a2; font-size: 0.9rem; }
+        footer { text-align: center; margin-top: 50px; color: #bdc3c7; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <h1>🏸 川崎礼盒 · 图册</h1>
+    <p class="sub">全系列礼盒一览</p>
+
+    <div class="series"><div class="series-title">⚡ 极光系列</div><div class="grid" id="aurora"></div></div>
+    <div class="series"><div class="series-title">🐦 青鸟系列</div><div class="grid" id="bluebird"></div></div>
+    <div class="series"><div class="series-title">🔩 螺纹钢系列</div><div class="grid" id="rebar"></div></div>
+    <div class="series"><div class="series-title">🎋 国风系列</div><div class="grid" id="dingfengbo"></div></div>
+    <div class="series"><div class="series-title">🎨 艺术·联名·限定</div><div class="grid" id="art"></div></div>
+    <div class="series"><div class="series-title">🎁 其他主题礼盒</div><div class="grid" id="other"></div></div>
+    <div class="series"><div class="series-title">＆ 12星座系列</div><div class="grid" id="xingzuo"></div></div>
+
+    <footer>图片存放于 /images/ 目录，文件名与型号一致</footer>
+
+    <script>
+        const allBoxes = [
+            { name: '极光7礼盒光之礼盒01', series: 'aurora' },
+            { name: '川崎礼盒-极光7极夜版', series: 'aurora' },
+            { name: '川崎礼盒-极光7礼盒03', series: 'aurora' },
+            { name: '川崎礼盒-极光7礼盒04', series: 'aurora' },
+            { name: '川崎礼盒-极光蓝光之礼盒05', series: 'aurora' },
+            { name: '川崎礼盒-极光7星河图礼盒06', series: 'aurora' },
+            { name: '川崎羽拍-极光7-520礼盒02', series: 'aurora' },
+            { name: '川崎礼盒-极光7情人节05', series: 'aurora' },
+            { name: '川崎礼盒-520礼盒-玫瑰金', series: 'aurora' },
+            { name: '川崎礼盒-520礼盒-黑金', series: 'aurora' },
+            { name: '川崎礼盒-极光7PRO礼盒-蓝01', series: 'aurora' },
+            { name: '川崎礼盒-极光7PRO礼盒-粉01', series: 'aurora' },
+            { name: '川崎礼盒-极光7pro礼盒-黑01', series: 'aurora' },
+            { name: '川崎礼盒-极光7Pro礼盒02', series: 'aurora' },
+            { name: '川崎礼盒-极光7Pro礼盒03', series: 'aurora' },
+            { name: '川崎礼盒-极光7Pro极光银礼盒04', series: 'aurora' },
+            { name: '川崎礼盒-极光7PRO双旦音乐磁吸礼盒', series: 'aurora' },
+            { name: '川崎礼盒-极光花拍礼盒01', series: 'aurora' },
+            { name: '川崎礼盒-极光50绿镜礼盒版01', series: 'aurora' },
+            { name: '川崎礼盒-极光50POWER MAX西装暴徒书型礼盒01', series: 'aurora' },
+
+            { name: '川崎礼盒-青鸟礼盒01-国风白', series: 'bluebird' },
+            { name: '川崎礼盒-青鸟礼盒02-国风蓝', series: 'bluebird' },
+            { name: '川崎礼盒-青鸟礼盒03', series: 'bluebird' },
+            { name: '川崎礼盒-青鸟礼盒04-巴黎紫', series: 'bluebird' },
+            { name: '川崎礼盒-青鸟礼盒05-巴黎粉', series: 'bluebird' },
+            { name: '川崎礼盒-青鸟礼盒06-日漫版', series: 'bluebird' },
+            { name: '川崎礼盒-青鸟礼盒07-国风鎏金版', series: 'bluebird' },
+            { name: '川崎礼盒-青鸟礼盒08-凤凰游', series: 'bluebird' },
+
+            { name: '川崎礼盒-螺纹钢礼盒01-银色版', series: 'rebar' },
+            { name: '川崎礼盒-螺纹钢礼盒02-红色版', series: 'rebar' },
+            { name: '川崎礼盒-螺纹钢礼盒03-淬火版', series: 'rebar' },
+
+            { name: '川崎礼盒-定风波礼盒01-竹林版', series: 'dingfengbo' },
+            { name: '川崎礼盒-定风波礼盒02-谧夜版', series: 'dingfengbo' },
+            { name: '川崎礼盒-定风波竹影礼盒03', series: 'dingfengbo' },
+            { name: '川崎礼盒-赤壁赋-鎏金江月', series: 'dingfengbo' },
+            { name: '川崎礼盒-金榜题名礼盒01', series: 'dingfengbo' },
+            { name: '川崎礼盒-金榜题名-登科金卷撕拉盒', series: 'dingfengbo' },
+
+            { name: '川崎礼盒-星月夜礼盒01-星澜', series: 'art' },
+            { name: '川崎礼盒-莫奈-睡莲01', series: 'art' },
+            { name: '川崎礼盒-达芬奇-岩间圣母01', series: 'art' },
+            { name: '川崎礼盒-莫奈-鸢尾花01', series: 'art' },
+            { name: '川崎礼盒-麦田与丝柏树', series: 'art' },
+            { name: '川崎礼盒-梵高-向日葵01', series: 'art' },
+
+            { name: '通用礼盒-2026龙马精神音乐磁吸礼盒', series: 'other' },
+            { name: '川崎礼盒-梧桐-凤栖礼盒01', series: 'other' },
+            { name: '夯兔礼盒-限定拼色礼盒01', series: 'other' },
+            { name: '川崎礼盒-限定礼盒02', series: 'other' },
+            { name: '川崎礼盒-限定礼盒03', series: 'other' },
+            { name: '川崎礼盒-独角兽礼盒01', series: 'other' },
+
+            { name: '川崎礼盒-极光7处女座礼盒', series: 'xingzuo' },
+            { name: '川崎礼盒-极光7狮子座礼盒', series: 'xingzuo' }
+        ];
+
+        function renderCards(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const ph = document.createElement('div');
+                ph.className = 'no-img';
+                ph.style.display = 'none';
+                ph.textContent = '🖼️ 图片缺失';
+
+                const img = document.createElement('img');
+                img.alt = item.name;
+                img.loading = 'lazy';
+                const base = 'images/' + encodeURIComponent(item.name);
+                img.src = base + '.png';
+                img.onerror = function () {
+                    if (!this.dataset.triedJpg) {
+                        this.dataset.triedJpg = '1';
+                        this.src = base + '.jpg';
+                    } else {
+                        this.style.display = 'none';
+                        ph.style.display = 'flex';
+                    }
+                };
+
+                const nameEl = document.createElement('div');
+                nameEl.className = 'name';
+                nameEl.textContent = item.name;
+
+                card.append(img, ph, nameEl);
+                container.appendChild(card);
+            });
+        }
+
+        ['aurora', 'bluebird', 'rebar', 'dingfengbo', 'art', 'other', 'xingzuo'].forEach(key => {
+            renderCards(key, allBoxes.filter(b => b.series === key));
+        });
+    </script>
+</body>
+</html>
